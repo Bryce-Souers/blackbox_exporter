@@ -90,9 +90,9 @@ func recursiveDNSHandler(w dns.ResponseWriter, r *dns.Msg) {
 }
 
 func TestRecursiveDNSResponse(t *testing.T) {
-	if os.Getenv("CI") == "true" {
+	/*if os.Getenv("CI") == "true" {
 		t.Skip("skipping; CI is failing on ipv6 dns requests")
-	}
+	}*/
 
 	tests := []struct {
 		Probe         config.DNSProbe
