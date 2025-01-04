@@ -29,18 +29,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
 
-      - name: Create .build directory to store artifacts
-        run: mkdir -p .build
-
-      - name: Set up promu
-        run: make promu
+      - name: Import promci
+        uses: prometheus/promci@v0.4.5
 
       - name: Cross-build for common architectures
-        run: ~/go/bin/promu crossbuild -v --parallelism 6 --parallelism-thread ${{ matrix.thread }} -p linux
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4.5.0
+        uses: ./.github/promci/actions/build
         with:
-          path: ${{ github.workspace }}/.build
-          if-no-files-found: error
-          include-hidden-files: true
+          thread: ${{ matrix.thread }}
+          parallelism: 6
+          promu_opts: -p linux
