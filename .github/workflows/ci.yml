@@ -29,6 +29,7 @@ jobs:
       - uses: actions/checkout@v4.2.2
       - run: mkdir -p .build
       - run: pwd
+      - run: ls -al
       - run: make promu
       - run: ~/go/bin/promu crossbuild -v --parallelism 3 --parallelism-thread ${{ matrix.thread }} -p linux
       - uses: actions/upload-artifact@v4.5.0
