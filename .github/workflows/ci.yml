@@ -32,6 +32,9 @@ jobs:
       - name: Create .build directory to store artifacts
         run: mkdir -p .build
 
+      - name: Set up promu
+        run: make promu
+
       - name: Cross-build for common architectures
         run: ~/go/bin/promu crossbuild -v --parallelism 6 --parallelism-thread ${{ matrix.thread }} -p linux
 
