@@ -20,8 +20,28 @@ jobs:
   #    - run: make build
   #    - run: make test GOOPTS=-v
 
+  build_common:
+    name: Build common architectures
+    if: github.event_name == 'pull_request'
+    strategy:
+      matrix:
+        thread: [0, 1, 2]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Import PromCI
+        uses: prometheus/promci@v0.4.5
+      - name: Cross-build
+        uses: ./.github/promci/actions/build
+        with:
+          thread: ${{ matrix.thread }}
+          parallelism: 3
+          promu_opts: -p linux/amd64 -p windows/amd64 -p linux/arm64 -p darwin/amd64 -p darwin/arm64 -p linux/386
+
   build_all:
-    name: Build for all architectures
+    name: Build all architectures
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     strategy:
       matrix:
         thread: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
@@ -29,10 +49,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
-
       - name: Import PromCI
         uses: prometheus/promci@v0.4.5
-
       - name: Cross-build
         uses: ./.github/promci/actions/build
         with:
@@ -42,24 +60,21 @@ jobs:
 
   publish_master:
     name: Publish master
-    if: github.event_name == 'push' && github.event.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs:
       - build_all
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
-
       - name: Import PromCI
         uses: prometheus/promci@v0.4.5
-
       - name: Publish
         uses: ./.github/promci/actions/publish_main
         with:
           docker_hub_organization: brycesouers
           docker_hub_login: ${{ secrets.DOCKER_HUB_LOGIN }}
           docker_hub_password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-
           quay_io_organization: brycesouers
           quay_io_login: ${{ secrets.QUAY_IO_LOGIN }}
           quay_io_password: ${{ secrets.QUAY_IO_PASSWORD }}
@@ -73,19 +88,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
-
       - name: Import PromCI
         uses: prometheus/promci@v0.4.5
-
       - name: Publish
         uses: ./.github/promci/actions/publish_release
         with:
           github_token: ${{ secrets.PROMBOT_GITHUB_TOKEN }}
-
           docker_hub_organization: brycesouers
           docker_hub_login: ${{ secrets.DOCKER_HUB_LOGIN }}
           docker_hub_password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-
           quay_io_organization: brycesouers
           quay_io_login: ${{ secrets.QUAY_IO_LOGIN }}
           quay_io_password: ${{ secrets.QUAY_IO_PASSWORD }}
