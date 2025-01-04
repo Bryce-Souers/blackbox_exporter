@@ -20,21 +20,22 @@ jobs:
   #    - run: make build
   #    - run: make test GOOPTS=-v
 
-  build:
+  build_all:
+    name: Build for all architectures
     strategy:
       matrix:
-        thread: [0, 1, 2, 3, 4, 5]
-    runs-on: ubuntu-latest
+        thread: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
 
-      - name: Import promci
+      - name: Import PromCI
         uses: prometheus/promci@v0.4.5
 
-      - name: Cross-build for common architectures
+      - name: Cross-build
         uses: ./.github/promci/actions/build
         with:
           thread: ${{ matrix.thread }}
-          parallelism: 6
+          parallelism: 12
           promu_opts: -p linux
