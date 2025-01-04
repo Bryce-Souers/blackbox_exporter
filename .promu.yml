@@ -1,7 +1,7 @@
 go:
   version: 1.23
 repository:
-  path: github.com/Bryce-Souers/blackbox_exporter
+  path: github.com/prometheus/blackbox_exporter
 build:
   ldflags: |
     -X github.com/prometheus/common/version.Version={{.Version}}
