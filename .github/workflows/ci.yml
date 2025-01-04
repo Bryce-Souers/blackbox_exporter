@@ -63,3 +63,29 @@ jobs:
           quay_io_organization: brycesouers
           quay_io_login: ${{ secrets.QUAY_IO_LOGIN }}
           quay_io_password: ${{ secrets.QUAY_IO_PASSWORD }}
+
+  publish_release:
+    name: Publish release
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v0.')
+    needs:
+      - build_all
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Import PromCI
+        uses: prometheus/promci@v0.4.5
+
+      - name: Publish
+        uses: ./.github/promci/actions/publish_release
+        with:
+          github_token: ${{ secrets.PROMBOT_GITHUB_TOKEN }}
+
+          docker_hub_organization: brycesouers
+          docker_hub_login: ${{ secrets.DOCKER_HUB_LOGIN }}
+          docker_hub_password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+          quay_io_organization: brycesouers
+          quay_io_login: ${{ secrets.QUAY_IO_LOGIN }}
+          quay_io_password: ${{ secrets.QUAY_IO_PASSWORD }}
