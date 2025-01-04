@@ -40,8 +40,8 @@ jobs:
           parallelism: 12
           promu_opts: -p linux
 
-  publish_master_images:
-    name: Publish master images
+  publish_master:
+    name: Publish master
     if: github.event_name == 'push' && github.event.ref == 'refs/heads/master'
     needs:
       - build_all
