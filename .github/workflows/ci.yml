@@ -31,7 +31,7 @@ jobs:
         shell: bash
       - run: make promu
         shell: bash
-      - run: ~/go/bin/promu crossbuild -v --prefix .build --parallelism 3 --parallelism-thread ${{ matrix.thread }} -p linux
+      - run: ~/go/bin/promu crossbuild -v --parallelism 3 --parallelism-thread ${{ matrix.thread }} -p linux
         shell: bash
       - uses: actions/upload-artifact@v4.5.0
         with:
