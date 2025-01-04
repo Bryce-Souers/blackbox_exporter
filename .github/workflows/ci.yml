@@ -32,6 +32,7 @@ jobs:
       - run: ls -al
       - run: make promu
       - run: ~/go/bin/promu crossbuild -v --parallelism 3 --parallelism-thread ${{ matrix.thread }} -p linux
+      - run: ls -al .build
       - uses: actions/upload-artifact@v4.5.0
         with:
           path: |
