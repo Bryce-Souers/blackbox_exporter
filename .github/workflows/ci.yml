@@ -56,8 +56,10 @@ jobs:
       - name: Publish
         uses: ./.github/promci/actions/publish_main
         with:
-          docker_hub_organization: brycesouers
+          docker_hub_organization: brycesouers/blackbox-exporter
           docker_hub_login: ${{ secrets.DOCKER_HUB_LOGIN }}
           docker_hub_password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+          quay_io_organization: brycesouers/blackbox-exporter
           quay_io_login: ${{ secrets.QUAY_IO_LOGIN }}
           quay_io_password: ${{ secrets.QUAY_IO_PASSWORD }}
