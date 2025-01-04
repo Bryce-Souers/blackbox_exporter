@@ -150,7 +150,7 @@ func TestChooseProtocol(t *testing.T) {
 	registry := prometheus.NewPedanticRegistry()
 	logger := promslog.New(&promslog.Config{})
 
-	ip, _, err := chooseProtocol(ctx, "ip4", true, "2607:f8b0:4023:1002::65", registry, logger)
+	ip, _, err := chooseProtocol(ctx, "ip4", true, "ipv6.google.com", registry, logger)
 	if err != nil {
 		t.Error(err)
 	}
