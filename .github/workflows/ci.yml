@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Read .promu.yml
-        uses: pietrobolcato/action-read-yaml@1.0.0
+        uses: pietrobolcato/action-read-yaml@dd664040f4883322f6d143e58302062b35a46e4d
         id: read_promu
         with:
           config: .promu.yml
