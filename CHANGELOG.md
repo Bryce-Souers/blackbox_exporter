@@ -1,3 +1,7 @@
+## 0.30.0 / 2025-01-04
+
+* [FEATURE] Testing releases!
+
 ## 0.26.0 / 2025-01-04
 
 * [FEATURE] Migrate from CircleCI to GitHub Actions
