@@ -65,7 +65,6 @@ jobs:
         with:
           thread: ${{ matrix.thread }}
           parallelism: 12
-          promu_opts: -p linux
 
   publish_master:
     name: Publish master
