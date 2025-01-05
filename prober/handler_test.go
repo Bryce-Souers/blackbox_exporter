@@ -28,7 +28,7 @@ import (
 	pconfig "github.com/prometheus/common/config"
 	"github.com/prometheus/common/promslog"
 
-	"github.com/prometheus/blackbox_exporter/config"
+	"github.com/Bryce-Souers/blackbox_exporter/config"
 )
 
 var c = &config.Config{

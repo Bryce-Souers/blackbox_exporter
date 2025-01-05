@@ -40,8 +40,8 @@ import (
 	webflag "github.com/prometheus/exporter-toolkit/web/kingpinflag"
 	"gopkg.in/yaml.v3"
 
-	"github.com/prometheus/blackbox_exporter/config"
-	"github.com/prometheus/blackbox_exporter/prober"
+	"github.com/Bryce-Souers/blackbox_exporter/config"
+	"github.com/Bryce-Souers/blackbox_exporter/prober"
 )
 
 var (
