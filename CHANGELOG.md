@@ -1,3 +1,7 @@
+## 0.26.0 / 2025-01-04
+
+* [FEATURE] Migrate from CircleCI to GitHub Actions
+
 ## 0.25.0 / 2024-04-09
 
 * [FEATURE] Allow to get Probe logs by target #1063
