@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       - name: Test
-        run: cat .promu.yml
+        run: cat ./.promu.yml
       - name: Set up Go
         uses: actions/setup-go@v5.2.0
         with:
